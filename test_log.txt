@@ -1,0 +1,339 @@
+Script started on Wed 29 Jun 2016 09:03:32 PM EDT
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ R
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: i686-pc-linux-gnu (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library("ape")
+> library("seqinr")
+Loading required package: ade4
+
+Attaching package: ‘seqinr’
+
+The following objects are masked from ‘package:ape’:
+
+    as.alignment, consensus
+
+> 
+> # input seq names
+> wg_seqs <- c("EF013666", "EF013665", "EF013775", "EF013664", "EF013669", "AY867423", "EF013671", "AY867427", "EF013690", "AY703626", "EF0 13663", "EF013661", "AY867421", "AY867429", "AY703634", "EF013660")
+> # read from GenBank
+> wg <- read.GenBank(wg_seqs, species.names=T)
+> # check the species names
+> attr(wg, "species")
+ [1] "Aenictus_ceylonicus"                   
+ [2] "Aenictogiton_sp._ZAM02"                
+ [3] "Tatuidris_sp._ECU01"                   
+ [4] "Adetomyrma_sp._MAD02"                  
+ [5] "Aneuretus_simoni"                      
+ [6] "Acanthostichus_kirbyi"                 
+ [7] "Anonychomyrma_gilberti"                
+ [8] "Dorylus_helvolus"                      
+ [9] "Cheliomyrmex_cf._morosus_CASENT0007006"
+[10] "Ectatomma_opaciventre"                 
+[11] "Acropyga_acutiventris"                 
+[12] "Acanthoponera_minor"                   
+[13] "Leptanilla_sp._D233"                   
+[14] "Leptanilloides_mckennae"               
+[15] "Myrmecia_pyriformis_Smith,_1858"       
+[16] "Acanthognathus_ocellatus"              
+> 
+> lr_seqs <- c("EF013538", "EF013537", "EF013647", "EF013536", "EF013541", "AY867485", "EF013543", "AY867489", "EF013562", "AY703760", "EF0 13535", "EF013533", "AY867483", "AY867491", "AY703768", "EF013532")
+> lr <- read.GenBank(lr_seqs, species.names=T)
+> # make sure the names are the same
+> attr(lr, "species")
+ [1] "Aenictus_ceylonicus"                   
+ [2] "Aenictogiton_sp._ZAM02"                
+ [3] "Tatuidris_sp._ECU01"                   
+ [4] "Adetomyrma_sp._MAD02"                  
+ [5] "Aneuretus_simoni"                      
+ [6] "Acanthostichus_kirbyi"                 
+ [7] "Anonychomyrma_gilberti"                
+ [8] "Dorylus_helvolus"                      
+ [9] "Cheliomyrmex_cf._morosus_CASENT0007006"
+[10] "Ectatomma_opaciventre"                 
+[11] "Acropyga_acutiventris"                 
+[12] "Acanthoponera_minor"                   
+[13] "Leptanilla_sp._D233"                   
+[14] "Leptanilloides_mckennae"               
+[15] "Myrmecia_pyriformis_Smith,_1858"       
+[16] "Acanthognathus_ocellatus"              
+> 
+> # write the files preserving names
+> write.fasta(wg, names=attr(wg, "species"), file.out="wingless.fas")
+> write.fasta(lr, names=attr(lr, "species"), file.out="LWRh.fas")
+> 
+> quit()
+Save workspace image? [y/n/c]: n
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ mafft wingless.fas > wingless_aln.fas
+
+nseq =  16
+distance =  ktuples
+iterate =  0
+cycle =  2
+nthread = 0
+generating 200PAM scoring matrix for nucleotides ... done
+done
+done
+scoremtx = -1
+Gap Penalty = -1.53, +0.00, +0.00
+
+tuplesize = 6, dorp = d
+
+
+Making a distance matrix ..
+
+WARNING : 2 unknown characters
+    1 / 16   11 / 16
+done.
+
+Constructing a UPGMA tree ... 
+    0 / 16   10 / 16
+done.
+
+Progressive alignment ... 
+STEP     1 / 15 fSTEP     2 / 15 fSTEP     3 / 15 fSTEP     4 / 15 fSTEP     5 / 15 fSTEP     6 / 15 fSTEP     7 / 15 fSTEP     8 / 15 fSTEP     9 / 15 fSTEP    10 / 15 dSTEP    11 / 15 dSTEP    12 / 15 dSTEP    13 / 15 dSTEP    14 / 15 dSTEP    15 / 15 d
+done.
+
+disttbfast (nuc) Version 7.123b alg=A, model=DNA200 (2),  1.530 ( 4.590), -0.000 (-0.000)
+0 thread(s)
+nthread = 0
+blosum 62 / kimura 200
+generating 200PAM scoring matrix for nucleotides ... done
+done
+done
+scoremtx = -1
+Gap Penalty = -1.53, +0.00, +0.00
+Making a distance matrix .. 
+    0 / 15   10 / 15
+done.
+
+Constructing a UPGMA tree ... 
+    0 / 16   10 / 16
+done.
+
+Progressive alignment ... 
+STEP     1 /15 fSTEP     2 /15 fSTEP     3 /15 fSTEP     4 /15 fSTEP     5 /15 fSTEP     6 /15 fSTEP     7 /15 fSTEP     8 /15 fSTEP     9 /15 fSTEP    10 /15 dSTEP    11 /15 dSTEP    12 /15 dSTEP    13 /15 dSTEP    14 /15 dSTEP    15 /15 d
+done.
+tbfast (nuc) Version 7.123b alg=A, model=DNA200 (2),  1.530 ( 4.590), -0.000 (-0.000)
+0 thread(s)
+
+
+Strategy:
+ FFT-NS-2 (Fast but rough)
+ Progressive method (guide trees were built 2 times.)
+
+If unsure which option to use, try 'mafft --auto input > output'.
+For more information, see 'mafft --help', 'mafft --man' and the mafft page.
+
+The default gap scoring scheme has been changed in version 7.110 (2013 Oct).
+It tends to insert more gaps into gap-rich regions than previous versions.
+To disable this change, add the --legacygappenalty option.
+
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ mafft LWRh.fas > LWRh_aln.fas
+
+nseq =  16
+distance =  ktuples
+iterate =  0
+cycle =  2
+nthread = 0
+generating 200PAM scoring matrix for nucleotides ... done
+done
+done
+scoremtx = -1
+Gap Penalty = -1.53, +0.00, +0.00
+
+tuplesize = 6, dorp = d
+
+
+Making a distance matrix ..
+    1 / 16   11 / 16
+done.
+
+Constructing a UPGMA tree ... 
+    0 / 16   10 / 16
+done.
+
+Progressive alignment ... 
+STEP     1 / 15 fSTEP     2 / 15 fSTEP     3 / 15 fSTEP     4 / 15 fSTEP     5 / 15 fSTEP     6 / 15 fSTEP     7 / 15 fSTEP     8 / 15 fSTEP     9 / 15 fSTEP    10 / 15 fSTEP    11 / 15 dSTEP    12 / 15 dSTEP    13 / 15 d
+Reallocating..done. *alloclen = 2149
+STEP    14 / 15 dSTEP    15 / 15 d
+done.
+
+disttbfast (nuc) Version 7.123b alg=A, model=DNA200 (2),  1.530 ( 4.590), -0.000 (-0.000)
+0 thread(s)
+nthread = 0
+blosum 62 / kimura 200
+generating 200PAM scoring matrix for nucleotides ... done
+done
+done
+scoremtx = -1
+Gap Penalty = -1.53, +0.00, +0.00
+Making a distance matrix .. 
+    0 / 15   10 / 15
+done.
+
+Constructing a UPGMA tree ... 
+    0 / 16   10 / 16
+done.
+
+Progressive alignment ... 
+STEP     1 /15 fSTEP     2 /15 fSTEP     3 /15 fSTEP     4 /15 fSTEP     5 /15 fSTEP     6 /15 fSTEP     7 /15 fSTEP     8 /15 fSTEP     9 /15 fSTEP    10 /15 dSTEP    11 /15 dSTEP    12 /15 dSTEP    13 /15 dSTEP    14 /15 dSTEP    15 /15 d
+done.
+tbfast (nuc) Version 7.123b alg=A, model=DNA200 (2),  1.530 ( 4.590), -0.000 (-0.000)
+0 thread(s)
+
+
+Strategy:
+ FFT-NS-2 (Fast but rough)
+ Progressive method (guide trees were built 2 times.)
+
+If unsure which option to use, try 'mafft --auto input > output'.
+For more information, see 'mafft --help', 'mafft --man' and the mafft page.
+
+The default gap scoring scheme has been changed in version 7.110 (2013 Oct).
+It tends to insert more gaps into gap-rich regions than previous versions.
+To disable this change, add the --legacygappenalty option.
+
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ 
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ amas concat -i *aln.fas -d dna -f fasta --out-format phylip
+Wrote concatenated sequences to phylip file 'concatenated.out'
+Wrote partitions for the concatenated file to 'partitions.txt'
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ 
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ sed -i 's/,//g' concatenated.out
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ sed -i 's/\.//g' concatenated.out
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ 
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ raxml -T 2 -d -m GTRGAMMA -p 1234 -s concatenated.out -o Leptanilla_sp_D233 -n test1
+
+
+Using BFGS method to optimize GTR rate parameters, to disable this specify "--no-bfgs" 
+
+
+This is the RAxML Master Pthread
+
+This is RAxML Worker Pthread Number: 1
+
+
+This is RAxML version 8.1.22 released by Alexandros Stamatakis on June 15 2015.
+
+With greatly appreciated code contributions by:
+Andre Aberer      (HITS)
+Simon Berger      (HITS)
+Alexey Kozlov     (HITS)
+Kassian Kobert    (HITS)
+David Dao         (KIT and HITS)
+Nick Pattengale   (Sandia)
+Wayne Pfeiffer    (SDSC)
+Akifumi S. Tanabe (NRIFS)
+
+Alignment has 538 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 6.44%
+
+RAxML rapid hill-climbing mode
+
+Using 1 distinct models/data partitions with joint branch length optimization
+
+
+Executing 1 inferences on the original alignment using 1 distinct complete random trees
+
+All free model parameters will be estimated by RAxML
+GAMMA model of rate heteorgeneity, ML estimate of alpha-parameter
+
+GAMMA Model parameters will be estimated up to an accuracy of 0.1000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 538
+Name: No Name Provided
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+
+RAxML was called as follows:
+
+raxml -T 2 -d -m GTRGAMMA -p 1234 -s concatenated.out -o Leptanilla_sp_D233 -n test1 
+
+
+Partition: 0 with name: No Name Provided
+Base frequencies: 0.228 0.277 0.254 0.241 
+
+Inference[0]: Time 3.294494 GAMMA-based likelihood -8195.674749, best rearrangement setting 5
+
+
+Conducting final model optimizations on all 1 trees under GAMMA-based models ....
+
+Inference[0] final GAMMA-based Likelihood: -8193.002812 tree written to file /home/mlb/Dropbox/script_test/RAxML_result.test1
+
+
+Starting final GAMMA-based thorough Optimization on tree 0 likelihood -8193.002812 .... 
+
+Final GAMMA-based Score of best tree -8193.002812
+
+Program execution info written to /home/mlb/Dropbox/script_test/RAxML_info.test1
+Best-scoring ML tree written to: /home/mlb/Dropbox/script_test/RAxML_bestTree.test1
+
+Overall execution time: 4.558747 secs or 0.001266 hours or 0.000053 days
+
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ python
+Python 2.7.6 (default, Mar 22 2014, 22:59:38) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import dendropy
+>>> 
+>>> tree = dendropy.Tree.get_from_path("RAxML_bestTree.test1", "newick")
+>>> print(tree.as_ascii_plot())
+                                                                                       /------------ Leptanilloides mckennae              
+                                                  /------------------------------------+                                                  
+                                                  |                                    \------------ Cheliomyrmex cf morosus CASENT0007006
+                                                  |                                                                                       
+            /-------------------------------------+                                    /------------ Dorylus helvolus                     
+            |                                     |                        /-----------+                                                  
+            |                                     |           /------------+           \------------ Aenictogiton sp ZAM02                
+            |                                     |           |            |                                                              
+            |                                     \-----------+            \------------------------ Aenictus ceylonicus                  
+            |                                                 |                                                                           
+            |                                                 \------------------------------------- Acanthostichus kirbyi                
+            |                                                                                                                             
+            |                        /-------------------------------------------------------------- Anonychomyrma gilberti               
+/-----------+                        |                                                                                                    
+|           |                        |                                     /------------------------ Aneuretus simoni                     
+|           |                        |                        /------------+                                                              
+|           |                        |                        |            |           /------------ Adetomyrma sp MAD02                  
+|           |            /-----------+                        |            \-----------+                                                  
+|           |            |           |            /-----------+                        \------------ Tatuidris sp ECU01                   
+|           |            |           |            |           |                                                                           
+|           |            |           |            |           |            /------------------------ Acanthognathus ocellatus             
++           |            |           |            |           \------------+                                                              
+|           \------------+           \------------+                        |           /------------ Acanthoponera minor                  
+|                        |                        |                        \-----------+                                                  
+|                        |                        |                                    \------------ Ectatomma opaciventre                
+|                        |                        |                                                                                       
+|                        |                        \------------------------------------------------- Acropyga acutiventris                
+|                        |                                                                                                                
+|                        \-------------------------------------------------------------------------- Myrmecia pyriformis Smith 1858       
+|                                                                                                                                         
+\--------------------------------------------------------------------------------------------------- Leptanilla sp D233                   
+                                                                                                                                          
+                                                                                                                                          
+>>> quit()
+]0;mlb@mlb-VirtualBox: ~/Dropbox/script_testmlb@mlb-VirtualBox:~/Dropbox/script_test$ exit
+exit
+
+Script done on Wed 29 Jun 2016 09:05:13 PM EDT
